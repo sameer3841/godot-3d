@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bx4rp3m8ani5b"]
+
+[ext_resource type="Texture2D" uid="uid://cekablny47x3w" path="res://assets/earth-texture/land.jpg" id="1_plu7x"]
+[ext_resource type="Script" path="res://scripts/character_body_3d.gd" id="2_8mlo0"]
+[ext_resource type="PackedScene" uid="uid://cc84akloru5lv" path="res://scenes/crypt.tscn" id="3_og1ia"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cq36l"]
+albedo_color = Color(1, 1, 0.494118, 1)
+albedo_texture = ExtResource("1_plu7x")
+uv1_triplanar = true
+
+[sub_resource type="Environment" id="Environment_d6bse"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wevf4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_avm04"]
+
+[node name="World" type="Node3D"]
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.639434, -1.108, -3.16629)
+material_override = SubResource("StandardMaterial3D_cq36l")
+use_collision = true
+size = Vector3(150, 0.002, 150)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
+environment = SubResource("Environment_d6bse")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(-0.603208, -0.409592, 0.684379, 0, 0.858065, 0.513541, -0.797584, 0.309772, -0.517592, 0, 0, -1.13753)
+light_color = Color(0.756863, 0.796078, 1, 1)
+light_energy = 0.7
+shadow_enabled = true
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+script = ExtResource("2_8mlo0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_wevf4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_avm04")
+
+[node name="Head" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.13753)
+
+[node name="crypt2" parent="." instance=ExtResource("3_og1ia")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00877, -1.10699, -10.0946)
