@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://cc84akloru5lv"]
+[gd_scene load_steps=7 format=4 uid="uid://cc84akloru5lv"]
 
 [ext_resource type="PackedScene" uid="uid://cgsu0r3h4ov7x" path="res://Models/Crypt/crypt.glb" id="1_bre34"]
+[ext_resource type="PackedScene" uid="uid://g5xcvs1yi0ju" path="res://scenes/crypt-small-entrance-alternative.glb" id="2_3af6g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e57a5"]
 resource_name = "colormap"
@@ -39,6 +40,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_i5jbc")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_uwj2m"]
+points = PackedVector3Array(0.3752, 0.0335885, 0.526292, 0.282722, 0.39197, 0.464173, 0.335976, 0.0335885, 0.565489, 0.3752, 0, 0.526292, 0.3752, 0.0335885, -0.526402, -0.000514179, 0.531948, 0.464173, 0.282722, 0.39197, -0.464284, 0.335976, 0, 0.565489, -0.336049, 0.0335885, 0.565489, 0.3752, 0, -0.526402, 0.335976, 0.0335885, -0.5656, -0.282796, 0.39197, 0.464173, -0.000514179, 0.531948, -0.464284, -0.336049, 0, 0.565489, -0.3752, 0.0335885, 0.526292, 0.335976, 0, -0.5656, -0.336049, 0.0335885, -0.5656, -0.282796, 0.39197, -0.464284, -0.3752, 0, 0.526292, -0.3752, 0.0335885, -0.526402, -0.336049, 0, -0.5656, -0.3752, 0, -0.526402)
+
 [node name="crypt2" instance=ExtResource("1_bre34")]
 
 [node name="crypt" parent="." index="0"]
@@ -51,3 +55,10 @@ visible = false
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
 mesh = SubResource("ArrayMesh_wdqcd")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="crypt2" index="1"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_uwj2m")
+
+[node name="crypt-small-entrance-alternative2" parent="crypt2" index="2" instance=ExtResource("2_3af6g")]
+transform = Transform3D(-2, 0, 0.00349075, 0, 2, 0, -0.00349075, 0, -2, -0.0542499, 0.0145518, -2.42779)
